@@ -1,0 +1,10 @@
+.gradle
+.idea
+
+**/*.terraform*
+
+#src/main/terraform/05_Apicurio/remote_resources_05_apicurio/apicurio-studio-0.2.51.Final-quickstart.zip
+
+#**/apicurio-studio-0.2.51.Final-quickstart.zip
+
+**/*apicurio*.zip

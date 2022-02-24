@@ -1,0 +1,164 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-pg-config
+  namespace: keycloak
+data:
+  POSTGRES_DB: "keycloak_db"
+  POSTGRES_USER: "keycloak"
+  POSTGRES_PASSWORD: "123456"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kc-pg-d
+  namespace: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak-pg
+  template:
+    metadata:
+      labels:
+        app: keycloak-pg
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:10.4
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: keycloak-pg-config
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak-pg-svc
+  namespace: keycloak
+  labels:
+    app: keycloak-pg
+spec:
+  type: NodePort
+  ports:
+    - name: node-port
+      port: 5432
+      targetPort: 5432
+      nodePort: 31003
+  selector:
+    app: keycloak-pg
+
+---
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: keycloak
+  name: keycloak
+  namespace: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: keycloak
+    spec:
+      containers:
+        - image: quay.io/keycloak/keycloak
+          name: keycloak
+          env:
+            - name: DB_ADDR
+              value: "keycloak-pg-svc"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_DATABASE
+              value: "keycloak_db"
+            - name: DB_PASSWORD
+              value: "123456"
+            - name: DB_USER
+              value: "keycloak"
+            - name: DB_VENDOR
+              value: POSTGRES
+            - name: KEYCLOAK_PASSWORD
+              value: "12345678"
+            - name: KEYCLOAK_USER
+              value: "keycloak"
+          ports:
+            - containerPort: 8080
+          resources: {}
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: keycloak
+  name: keycloak
+  namespace: keycloak
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+      nodePort: 32000
+  selector:
+    app: keycloak
+
+---
+
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: keycloak-ingress
+#  namespace: keycloak
+#  annotations:
+#    nginx.ingress.kubernetes.io/app-root: /auth
+#spec:
+#  rules:
+#    - http:
+#        paths:
+#          - path: /
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: keycloak
+#                port:
+#                  number: 8080
+
+
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: keycloak-ingress
+  namespace: keycloak
+  annotations:
+  labels:
+    module: keycloak-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: "keycloak"
+                port:
+                  number: 8080
+            path: /auth
+            pathType: Prefix

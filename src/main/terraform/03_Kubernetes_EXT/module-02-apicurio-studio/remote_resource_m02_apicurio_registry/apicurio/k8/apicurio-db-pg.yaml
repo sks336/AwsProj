@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apicurio-pg-config
+  namespace: apicurio
+data:
+  POSTGRES_DB: "apicuriodb"
+  POSTGRES_USER: "sachin"
+  POSTGRES_PASSWORD: "123456"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apicurio-pg-d
+  namespace: apicurio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apicurio-pg
+  template:
+    metadata:
+      labels:
+        app: apicurio-pg
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:10.4
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: apicurio-pg-config
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: apicurio-pg-svc
+  namespace: apicurio
+  labels:
+    app: apicurio-pg
+spec:
+  type: NodePort
+  ports:
+    - name: node-port
+      port: 5432
+      targetPort: 5432
+      nodePort: 30004
+  selector:
+    app: apicurio-pg
