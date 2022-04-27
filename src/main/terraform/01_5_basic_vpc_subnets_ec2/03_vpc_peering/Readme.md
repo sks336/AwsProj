@@ -1,0 +1,1 @@
+![](vpc_peering_arch_diagram.jpeg)
