@@ -50,8 +50,7 @@ resource "aws_vpc_peering_connection" "vpc_peering_conn" {
 
 
 resource "aws_route" "vpc_01_to_vpc_02" {
-  route_table_id = module.vpc_01.rt_w
-    ith_nat
+  route_table_id = module.vpc_01.rt_with_nat
   destination_cidr_block = var.vpc_cidr2
   vpc_peering_connection_id = aws_vpc_peering_connection.vpc_peering_conn.id
 }
@@ -65,26 +64,31 @@ resource "aws_route" "vpc_02_to_vpc_01" {
 
 
 
-module "aws_instance_01" {
+module "aws_instances_vpc_01" {
+  count = 2
   source = "../modules/ec2"
-  num_instances = 2
-  instance_prefix = "i-vpc-01"
+  instance_az = var.subnets_azs[count.index]
+  num_instances = 1
+  instances_per_azs = [1, 1] # NOT USED
   ami_image           = var.ami_image
   instance_type = var.instance_type
-  subnet_ids = module.vpc_01.subnets_ids
   key_pair_name = var.key_pair_name
-  vpc_security_group_ids = [module.vpc_01.allow_all_ingress_ports_id]
+  subnets_ids_map = module.vpc_01.subnets_ids_map
+  vpc_security_group_ids = module.vpc_01.allow_all_ingress_ports_id
 }
 
 
 
-module "aws_instance_02" {
+
+module "aws_instances_vpc_02" {
+  count = 2
   source = "../modules/ec2"
-  num_instances = 2
-  instance_prefix = "i-vpc-02"
+  instance_az = var.subnets_azs[count.index]
+  num_instances = 1
+  instances_per_azs = [1, 1] # NOT USED
   ami_image           = var.ami_image
   instance_type = var.instance_type
-  subnet_ids = module.vpc_02.subnets_ids
   key_pair_name = var.key_pair_name
-  vpc_security_group_ids = [module.vpc_02.allow_all_ingress_ports_id]
+  subnets_ids_map = module.vpc_02.subnets_ids_map
+  vpc_security_group_ids = module.vpc_02.allow_all_ingress_ports_id
 }

@@ -46,3 +46,29 @@ variable "deploy_igw_enabled" {
 variable "deploy_tgw_enabled" {
   type = bool
 }
+
+
+
+variable "ami_image" {
+  type = string
+}
+
+variable "instance_type" {
+  type = string
+}
+
+variable "key_pair_name" {
+  type = string
+}
+
+variable "instances_azs" {
+  type = list(string)
+}
+
+variable "create_instances" {
+  type = bool
+}
+
+variable "instances_per_azs" {
+  type = list(number)
+}
