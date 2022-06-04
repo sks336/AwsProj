@@ -1,16 +1,13 @@
 #!/usr/bin/env sh
 
 ########################################################
-export CENTOS_HOME=/home/centos
-export HOME_01_BASE=$CENTOS_HOME/01_base
+
 ########################################################
 
 echo "Inside install_kubernetes shell script....running as : [$(whoami)]"
 
 ########################################################
 function setUpKubernetes() {
-#sudo yum update -y
-#sudo yum clean all -y
 modprobe br_netfilter
 lsmod | grep br_netfilter
 cat <<EOF | tee /etc/modules-load.d/k8s.conf
@@ -32,7 +29,6 @@ repo_gpgcheck=0
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 exclude=kubelet kubeadm kubectl' > /etc/yum.repos.d/kubernetes.repo
 
-#sed -i 's/^repo_gpgcheck=1$/repo_gpgcheck=0/' /etc/yum.repos.d/kubernetes.repo
 echo "content of kubernetes repo file is : $(cat /etc/yum.repos.d/kubernetes.repo)"
 
 setenforce 0
@@ -42,12 +38,10 @@ swapoff -a
 sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 echo "content of selinux config file is $(cat /etc/selinux/config)"
 
+yum install -y kubeadm-1.21.1-0 kubelet-1.21.1-0  kubectl-1.21.1-0 --disableexcludes=kubernetes
 
-
-
-yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 systemctl enable --now kubelet
-#kubeadm config images pull
+kubeadm config images pull
 }
 
 sudo bash -c "$(declare -f setUpKubernetes); setUpKubernetes"
