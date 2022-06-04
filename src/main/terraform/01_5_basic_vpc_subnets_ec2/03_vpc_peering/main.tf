@@ -77,9 +77,6 @@ module "aws_instances_vpc_01" {
   vpc_security_group_ids = module.vpc_01.allow_all_ingress_ports_id
 }
 
-
-
-
 module "aws_instances_vpc_02" {
   count = 2
   source = "../modules/ec2"
