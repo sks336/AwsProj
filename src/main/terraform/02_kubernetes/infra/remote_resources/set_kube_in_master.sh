@@ -39,6 +39,9 @@ function handleCgroupDriver() {
 echo "Inside setting up kube in master script as user : $(whoami)"
 
 sudo mkdir -p $HOME/.kube && sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && sudo chown centos:centos $HOME/.kube/config
+sudo mkdir -p /home/sachin/.kube && sudo cp -i /etc/kubernetes/admin.conf /home/sachin/.kube/config && sudo chown -R sachin:sachin /home/sachin/.kube
+
+
 checkKubectlCommandAvailability
 handleCgroupDriver
 

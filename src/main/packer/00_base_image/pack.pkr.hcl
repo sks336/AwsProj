@@ -8,7 +8,7 @@ packer {
 }
 
 source "amazon-ebs" "base-centos" {
-  ami_name      = "super-base-image"
+  ami_name      = "00-super-base-image"
   instance_type = "t2.medium"
   region        = "ap-southeast-1"
   source_ami_filter {

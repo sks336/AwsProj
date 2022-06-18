@@ -49,7 +49,7 @@ resource "aws_launch_configuration" "example" {
   instance_type   = var.instance_type
   security_groups = [aws_security_group.instance.id]
 
-  key_name = "sachin-aws-kp"
+  key_name = "sachin-aws-kp2"
 
   user_data = <<-EOF
               #!/bin/bash

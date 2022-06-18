@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_instance" "kube-master" {
   ami           = var.ami_image
   instance_type = var.instance-type
-  key_name = "sachin-aws-kp"
+  key_name = "sachin-aws-kp2"
   security_groups = [aws_security_group.kube-ports.name, aws_security_group.basic-ports.name]
 
   provisioner "file" {
@@ -16,7 +16,7 @@ resource "aws_instance" "kube-master" {
       type        = "ssh"
       port        = 22
       user        = "centos"
-      private_key = "${file("/Users/sachin/work/aws/sachin-aws-kp.pem")}"
+      private_key = "${file("/Users/sachin/work/keys/aws/sachin-aws-kp2.pem")}"
       timeout     = "2m"
       agent       = false
     }
@@ -34,7 +34,7 @@ resource "aws_instance" "kube-master" {
       type        = "ssh"
       port        = 22
       user        = "centos"
-      private_key = "${file("/Users/sachin/work/aws/sachin-aws-kp.pem")}"
+      private_key = "${file("/Users/sachin/work/keys/aws/sachin-aws-kp2.pem")}"
       timeout     = "2m"
       agent       = false
     }
@@ -102,6 +102,7 @@ data "external" "kube-ingress-port" {
 }
 
 resource "aws_route53_record" "kube" {
+  count = var.deploy_route_53 ? 1 : 0
   allow_overwrite = true
   name            = "kube.thesachinshukla.com"
   ttl             = 3600

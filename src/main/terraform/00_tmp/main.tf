@@ -3,26 +3,50 @@ provider "aws" {
 }
 
 resource "aws_instance" "tmp-instance" {
-  ami           = lookup(var.ami_images_regional, var.aws_region)
+  ami           = var.ami_image
   instance_type = var.instance_type
-  key_name = "sachin-aws-kp"
+  key_name = "sachin-aws-kp2"
+
+  tags = {
+    usecase = "testing-${var.aws_region}"
+  }
+}
+
+
+resource "null_resource" "run_me_always" {
+  depends_on = [aws_instance.tmp-instance]
+  triggers = {
+    always_run = timestamp()
+  }
 
   provisioner "file" {
     source      = "resources_00_tmp"
     destination = "/tmp"
     connection {
-      host        = coalesce(self.public_ip, self.private_ip)
+      host        = aws_instance.tmp-instance.public_ip
       type        = "ssh"
       port        = 22
       user        = "centos"
-      private_key = "${file("~/work/aws/sachin-aws-kp.pem")}"
+      private_key = "${file("/Users/sachin/work/keys/aws/sachin-aws-kp2.pem")}"
       timeout     = "2m"
       agent       = false
     }
   }
 
-  tags = {
-    usecase = "testing-${var.aws_region}"
+  provisioner "remote-exec" {
+    inline = [
+      "sh /home/sachin/scripts/run_nginx.sh"
+    ]
+    connection {
+      host        = aws_instance.tmp-instance.public_ip
+      type        = "ssh"
+      port        = 22
+      user        = "centos"
+      private_key = "${file("/Users/sachin/work/keys/aws/sachin-aws-kp2.pem")}"
+      timeout     = "2m"
+      agent       = false
+    }
+
   }
 }
 

@@ -13,7 +13,7 @@ source "amazon-ebs" "base-centos" {
   region        = "ap-southeast-1"
   source_ami_filter {
     filters = {
-      image-id            = "ami-05e817bee0ac843ee"
+      image-id            = "ami-0d4c22be784b8a432"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
@@ -26,6 +26,10 @@ source "amazon-ebs" "base-centos" {
 build {
   name    = "base-image-packer"
   sources = ["source.amazon-ebs.base-centos"]
+
+  provisioner "shell" {
+    inline = ["sudo rm -rf /tmp/*"]
+  }
 
   provisioner "file" {
     source = "remote_resources_99"

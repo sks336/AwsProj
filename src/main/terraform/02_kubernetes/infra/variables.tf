@@ -18,4 +18,10 @@ variable n_slaves {
 variable "hosted_zone_id" {
   type = string
 }
+
+variable "deploy_route_53" {
+  type = bool
+  default = false
+}
+
 # --------------------------------------------------------------------------------
