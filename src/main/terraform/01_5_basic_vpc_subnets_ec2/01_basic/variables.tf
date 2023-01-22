@@ -61,9 +61,6 @@ variable "key_pair_name" {
   type = string
 }
 
-variable "instances_azs" {
-  type = list(string)
-}
 
 variable "create_instances" {
   type = bool

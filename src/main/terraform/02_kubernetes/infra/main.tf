@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_instance" "kube-master" {
   ami           = var.ami_image
   instance_type = var.instance-type
-  key_name = "sachin-aws-kp2"
+  key_name = "sachin-aws-kp3"
   security_groups = [aws_security_group.kube-ports.name, aws_security_group.basic-ports.name]
 
   provisioner "file" {
@@ -16,7 +16,7 @@ resource "aws_instance" "kube-master" {
       type        = "ssh"
       port        = 22
       user        = "centos"
-      private_key = "${file("/Users/sachin/work/keys/aws/sachin-aws-kp2.pem")}"
+      private_key = "${file("/Users/sachin/work/keys/aws/sachin-aws-kp3.pem")}"
       timeout     = "2m"
       agent       = false
     }
@@ -34,7 +34,7 @@ resource "aws_instance" "kube-master" {
       type        = "ssh"
       port        = 22
       user        = "centos"
-      private_key = "${file("/Users/sachin/work/keys/aws/sachin-aws-kp2.pem")}"
+      private_key = "${file("/Users/sachin/work/keys/aws/sachin-aws-kp3.pem")}"
       timeout     = "2m"
       agent       = false
     }

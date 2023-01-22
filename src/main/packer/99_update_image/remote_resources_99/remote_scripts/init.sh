@@ -10,29 +10,70 @@ echo "Inside script init.sh....running as :: [$(whoami)]"
 ###########################################################################
 
 
+echo "#!/usr/bin/env bash
+
+/usr/bin/run_nginx.sh
+
+" | sudo tee /usr/bin/startup.sh
+
+sudo chmod +x /usr/bin/startup.sh
+
+
 function handleNginX() {
 
   sudo yum install nginx -y
   sudo chown sachin. /sbin/nginx
   sudo chown -R sachin. /usr/share/nginx
-  mkdir -p $HOME/scripts
 
   echo '
   PRIVATE_IP=$(curl -sSX GET http://169.254.169.254/latest/meta-data/local-ipv4)
   echo $PRIVATE_IP | sudo tee /usr/share/nginx/html/index.html
   sudo nginx -s stop
   sudo nginx
-  '>$HOME/scripts/run_nginx.sh
+  ' | sudo tee /usr/bin/run_nginx.sh
 
-  chmod +x $HOME/scripts/*.sh
+  sudo chmod +x /usr/bin/run_nginx.sh
 
-  sudo sed -i '/run_nginx.sh/d' /etc/rc.local
-  echo '/home/sachin/scripts/run_nginx.sh' | sudo tee -a /etc/rc.local
 
 }
 
 
+
+function enableAndStartServices() {
+
+    echo  "
+
+    [Unit]
+    Description=Script to run at startup
+    After=network.target
+
+    [Service]
+    Type=simple
+    ExecStart="/usr/bin/startup.sh"
+    TimeoutStartSec=0
+
+    [Install]
+    WantedBy=default.target
+    " |  sudo tee /etc/systemd/system/startup.service
+    sudo systemctl daemon-reload
+    sudo systemctl enable startup.service
+    sudo systemctl restart startup.service
+    sudo systemctl status startup.service
+
+    sudo cat /etc/systemd/system/startup.service
+}
+
+
+
+
+
 handleNginX
+enableAndStartServices
+
+
+
+
+#sudo chmod +x /etc/rc.d/rc.local
 
 
 #which jq

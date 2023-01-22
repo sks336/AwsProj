@@ -32,3 +32,26 @@ resource "aws_security_group" "allow_all_ingress_ports" {
     Name = "allow_all_ingress_ports"
   }
 }
+
+resource "aws_security_group" "unsercure_sg" {
+  name = "unsercure_sg"
+  vpc_id = aws_vpc.my_vpc.id
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "unsercure_sg"
+  }
+}

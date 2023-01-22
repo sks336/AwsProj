@@ -10,7 +10,7 @@ variable "key_pair_name" {
   type = string
 }
 
-variable "instance_az" {
+variable "subnets_az" {
   type = string
 }
 variable "instances_per_azs" {
@@ -29,6 +29,10 @@ variable "vpc_security_group_ids" {
   type = list(string)
 }
 
+
+variable "vpc_id" {
+  type = string
+}
 #variable "instance_prefix" {
 #  type = string
 #}

@@ -17,9 +17,10 @@ module "base_infra" {
 
 
 module "aws_instance" {
-  count = var.create_instances ? length(var.instances_azs) : 0
+  count = var.create_instances ? length(var.subnets_azs) : 0
+  vpc_id = module.base_infra.my_vpc_id
   source = "../modules/ec2"
-  instance_az = var.instances_azs[count.index]
+  subnets_az = var.subnets_azs[count.index]
   num_instances = var.instances_per_azs[count.index]
   instances_per_azs = var.instances_per_azs # NOT USED
   ami_image           = var.ami_image

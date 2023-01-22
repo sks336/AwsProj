@@ -67,7 +67,8 @@ resource "aws_route" "vpc_02_to_vpc_01" {
 module "aws_instances_vpc_01" {
   count = 2
   source = "../modules/ec2"
-  instance_az = var.subnets_azs[count.index]
+  vpc_id = module.vpc_01.my_vpc_id
+  subnets_az = var.subnets_azs[count.index]
   num_instances = 1
   instances_per_azs = [1, 1] # NOT USED
   ami_image           = var.ami_image
@@ -80,7 +81,8 @@ module "aws_instances_vpc_01" {
 module "aws_instances_vpc_02" {
   count = 2
   source = "../modules/ec2"
-  instance_az = var.subnets_azs[count.index]
+  vpc_id = module.vpc_02.my_vpc_id
+  subnets_az = var.subnets_azs[count.index]
   num_instances = 1
   instances_per_azs = [1, 1] # NOT USED
   ami_image           = var.ami_image

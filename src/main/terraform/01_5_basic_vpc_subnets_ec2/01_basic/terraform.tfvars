@@ -1,5 +1,5 @@
 allow_all_ingress_ports = [22, 80, 443, 8080]
-ami_image = "ami-09795ba3720fbb0d0"
+ami_image = "ami-0a3008e4c99490c4e"
 aws_region = "ap-southeast-1"
 bucket_name = "sach-infra-tf-state"
 deploy_nat_enabled=true # Need more code changes to make it work for false condition
@@ -11,14 +11,14 @@ deploy_tgw_enabled=false
 create_instances = true
 
 # Define the AZs where instances should be created! (this must be the subset of property 'subnets_azs')
-instances_azs = ["ap-southeast-1a","ap-southeast-1b"]
+#instances_azs = ["ap-southeast-1a","ap-southeast-1b","ap-southeast-1c"]
 
 # Define the number of instances that should be created on these azs
-instances_per_azs = [1, 2]
+instances_per_azs = [0, 0, 0]
 
 instance_type = "t2.micro"
 key_pair_name = "sachin-aws-kp2"
 subnets_azs = ["ap-southeast-1a","ap-southeast-1b", "ap-southeast-1c"]
-subnets_cidr = ["12.0.0.0/24","12.0.1.0/24","12.0.2.0/24"]
+subnets_cidr = ["12.1.0.0/24","12.1.1.0/24","12.1.2.0/24"]
 subnets_visibility = ["public","private","private"] # For now, the value "public" has to be at the first index.
-vpc_cidr = "12.0.0.0/16"
+vpc_cidr = "12.1.0.0/16"

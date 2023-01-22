@@ -33,7 +33,7 @@ resource "null_resource" "run_me_always" {
       type        = "ssh"
       port        = 22
       user        = "centos"
-      private_key = "${file("/Users/sachin/work/keys/aws/sachin-aws-kp2.pem")}"
+      private_key = "${file("/Users/sachin/work/keys/aws/sachin-aws-kp3.pem")}"
       timeout     = "2m"
       agent       = false
     }
@@ -52,7 +52,7 @@ resource "null_resource" "run_me_always" {
       type        = "ssh"
       port        = 22
       user        = "centos"
-      private_key = "${file("/Users/sachin/work/keys/aws/sachin-aws-kp2.pem")}"
+      private_key = "${file("/Users/sachin/work/keys/aws/sachin-aws-kp3.pem")}"
       timeout     = "2m"
       agent       = false
     }

@@ -22,7 +22,12 @@ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/dock
 echo 'Config manage added the repo.....'
 sudo yum install -y yum-utils device-mapper-persistent-data lvn2
 echo 'Install docker utils......'
-sudo yum install docker-ce-18.06.1.ce-3.el7 -y
+
+
+# sudo yum install docker-ce-18.06.1.ce-3.el7 -y
+sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+
 echo 'Installed Docker.....'
 sudo systemctl enable docker
 sudo systemctl start docker
