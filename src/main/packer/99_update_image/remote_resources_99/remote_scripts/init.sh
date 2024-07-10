@@ -10,13 +10,20 @@ echo "Inside script init.sh....running as :: [$(whoami)]"
 ###########################################################################
 
 
-echo "#!/usr/bin/env bash
+chmod 400 /home/sachin/.ssh/id_rsa
+chmod 400 /home/sachin/.ssh/id_rsa.pub
 
-/usr/bin/run_nginx.sh
+echo 'Fixed the permission'
 
-" | sudo tee /usr/bin/startup.sh
+ls -asl /home/sachin/.ssh/*
 
-sudo chmod +x /usr/bin/startup.sh
+#echo "#!/usr/bin/env bash
+#
+#/usr/bin/run_nginx.sh
+#
+#" | sudo tee /usr/bin/startup.sh
+#
+#sudo chmod +x /usr/bin/startup.sh
 
 
 function handleNginX() {
@@ -67,8 +74,8 @@ function enableAndStartServices() {
 
 
 
-handleNginX
-enableAndStartServices
+#handleNginX
+#enableAndStartServices
 
 
 
