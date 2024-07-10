@@ -7,6 +7,9 @@ export HOME_01_BASE=$CENTOS_HOME/01_base
 
 echo "Inside script install_docker.sh....running as : [$(whoami)]"
 
+chmod 400 /home/sachin/.ssh/id_rsa
+chmod 400 /home/sachin/.ssh/id_rsa.pub
+
 ###########################################################################
 function installHelm() {
     cd /tmp

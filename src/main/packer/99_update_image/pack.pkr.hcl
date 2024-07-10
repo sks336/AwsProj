@@ -8,12 +8,12 @@ packer {
 }
 
 source "amazon-ebs" "base-centos" {
-  ami_name      = "01-base-image-aws"
+  ami_name      = "03-base-image-aws"
   instance_type = "t2.medium"
   region        = "ap-southeast-1"
   source_ami_filter {
     filters = {
-      image-id            = "ami-0782fdc8213cba321"
+      image-id            = "ami-0a3008e4c99490c4e"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
