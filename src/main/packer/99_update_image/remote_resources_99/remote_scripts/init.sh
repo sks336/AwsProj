@@ -21,9 +21,9 @@ ls -asl /home/sachin/.ssh/*
 #
 #/usr/bin/run_nginx.sh
 #
-#" | sudo tee /usr/bin/startup.sh
+#" | sudo tee /usr/bin/setup_services.sh
 #
-#sudo chmod +x /usr/bin/startup.sh
+#sudo chmod +x /usr/bin/setup_services.sh
 
 
 function handleNginX() {
@@ -56,7 +56,7 @@ function enableAndStartServices() {
 
     [Service]
     Type=simple
-    ExecStart="/usr/bin/startup.sh"
+    ExecStart="/usr/bin/start_all_services.sh"
     TimeoutStartSec=0
 
     [Install]

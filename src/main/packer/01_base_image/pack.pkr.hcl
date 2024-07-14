@@ -13,14 +13,14 @@ source "amazon-ebs" "base-centos" {
   region        = "ap-southeast-1"
   source_ami_filter {
     filters = {
-      image-id            = "ami-0128a2e6ccdd8e088"
-      root-device-type    = "ebs"
-      virtualization-type = "hvm"
+      image-id            = "ami-0d090b1767525e510"
+#      root-device-type    = "ebs"
+#      virtualization-type = "hvm"
     }
     most_recent = true
-    owners      = ["839006695980"]
+    owners      = ["339713188524"]
   }
-  ssh_username = "centos"
+  ssh_username = "ubuntu"
 }
 
 build {
@@ -32,7 +32,7 @@ build {
     destination = "/tmp/remote_resources_01"
   }
   provisioner "shell" {
-    script = "remote_resources_01/entry-point.sh"
+    script = "entry-point.sh"
     pause_before = "3s"
   }
 }
