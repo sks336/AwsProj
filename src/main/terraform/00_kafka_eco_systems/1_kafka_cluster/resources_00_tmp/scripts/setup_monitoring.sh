@@ -64,7 +64,7 @@ scrape_configs:
     WantedBy=multi-user.target
     " |  sudo tee /etc/systemd/system/prometheus.service
 
-    echo "==========>>>>>> Content of file /etc/systemd/system/kafka.service"
+    echo "==========>>>>>> Content of file /etc/systemd/system/prometheus.service"
     sudo cat /etc/systemd/system/prometheus.service
 }
 

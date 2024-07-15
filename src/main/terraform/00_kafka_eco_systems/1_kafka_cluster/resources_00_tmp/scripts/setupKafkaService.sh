@@ -5,6 +5,9 @@ export SACHIN_HOME=/home/sachin
 export KAFKA_HOME=/home/sachin/softwares/kafka
 ########################################################
 
+
+sudo systemctl stop kafka
+sudo rm -rf /var/log/kafka
 sudo mkdir -p /var/log/kafka
 sudo chmod -R 777 /var/log/kafka
 chmod 400 /home/sachin/.ssh/id_rsa
@@ -24,7 +27,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo "Inside the setupKafkaService shell script.....pwd is: $(pwd), running as : [$(whoami)], NODE_ID=$NODE_ID"
 
-sudo systemctl stop kafka
+
 
 setupKafkaConfig() {
   echo "KAFKA_HOME is: $KAFKA_HOME"
@@ -70,7 +73,7 @@ echo "
 export KAFKA_HOME=$KAFKA_HOME
 export NODE_ID=$NODE_ID
 export SACHIN_HOME=$SACHIN_HOME
-export KAFKA_OPTS='-javaagent:${SACHIN_HOME}/resources_00_tmp/lib/jmx_prometheus_javaagent-1.0.1.jar=7071:${SACHIN_HOME}/resources_00_tmp/lib/prom-jmx-agent-config.yml'
+export KAFKA_OPTS='-javaagent:${SACHIN_HOME}/resources_00_tmp/lib/jmx_prometheus_javaagent-1.0.1.jar=7071:${SACHIN_HOME}/resources_00_tmp/lib/kafka_kraft.yml'
 
 export KAFKA_CLUSTER_ID=$(cat /tmp/cluster.id)
 " | sudo tee -a /usr/bin/kafka.sh

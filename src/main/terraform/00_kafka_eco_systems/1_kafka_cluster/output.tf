@@ -25,3 +25,7 @@ output "prometheusURL" {
   value= "http://${aws_instance.instance_master[0].public_ip}:9090/graph"
 }
 
+output "grafanaURL" {
+  value= "http://${aws_instance.instance_master[0].public_ip}:3000"
+}
+

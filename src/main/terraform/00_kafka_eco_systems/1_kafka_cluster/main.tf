@@ -11,11 +11,12 @@ data "aws_security_group" "unsecure" {
 resource "aws_instance" "instance_master" {
   count         = var.master_node_count
   ami           = var.ami_image
-  instance_type = var.instance_type
+  instance_type = var.master_instance_type
   key_name = "sachin-kp"
   vpc_security_group_ids = [data.aws_security_group.unsecure.id]
 
   tags = {
+    Name = "kafka-master"
     usecase = "testing-${var.aws_region}"
   }
 }
@@ -29,6 +30,7 @@ resource "aws_instance" "instance_workers" {
   vpc_security_group_ids = [data.aws_security_group.unsecure.id]
 
   tags = {
+    Name = "kafka-worker-${count.index+1}"
     usecase = "testing-${var.aws_region}"
   }
 }
@@ -125,8 +127,38 @@ resource "null_resource" "run_me_always_monitoring" {
   provisioner "remote-exec" {
 
     inline = [
-      "sudo -H -u sachin /home/sachin/resources_00_tmp/scripts/setup_monitoring.sh ${aws_instance.instance_master[0].private_ip} ${aws_instance.instance_workers[0].private_ip} ${aws_instance.instance_workers[1].private_ip}"
+      "sudo -H -u sachin /home/sachin/resources_00_tmp/scripts/setup_monitoring.sh ${aws_instance.instance_master[0].private_ip} ${aws_instance.instance_workers[0].private_ip} ${aws_instance.instance_workers[1].private_ip}",
+      "sudo -H -u sachin /home/sachin/resources_00_tmp/scripts/setup_grafana.sh"
     ]
   }
 }
+
+
+
+resource "null_resource" "run_me_always_restart_services_master" {
+  count = var.master_node_count
+  depends_on = [null_resource.run_me_always_workers]
+  triggers = {
+    always_run = timestamp()
+  }
+
+  connection {
+    host        = aws_instance.instance_master[count.index].public_ip
+    type        = "ssh"
+    port        = 22
+    user        = "ubuntu"
+    private_key = "${file("/Users/sachin/work/keys/aws/sjlearning_2024/sachin-kp.pem")}"
+    timeout     = "2m"
+    agent       = false
+  }
+
+  provisioner "remote-exec" {
+
+    inline = [
+      "sudo systemctl stop kafka",
+      "sudo systemctl start kafka"
+    ]
+  }
+}
+
 

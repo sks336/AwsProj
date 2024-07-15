@@ -10,6 +10,9 @@ variable "ami_image" {
 variable "instance_type" {
   type = string
 }
+variable "master_instance_type" {
+  type = string
+}
 
 variable "sg_unsecure" {
   type = string
