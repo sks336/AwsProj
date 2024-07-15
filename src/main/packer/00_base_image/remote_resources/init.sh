@@ -30,16 +30,13 @@ export PATH=$HOME/softwares/bins:$HOME/softwares/maven/bin:$PATH
 " >> $HOME/.bashrc
 
 
-echo "
-Host *
-    StrictHostKeyChecking no
-" > $SACHIN_HOME/.ssh/config
+
 
 # Execute scripts
-${SACHIN_HOME}/00_base/scripts/enable_systemctl_services.sh
 
 ${SACHIN_HOME}/00_base/scripts/install_nginx.sh
 ${SACHIN_HOME}/00_base/scripts/install_maven.sh
 ${SACHIN_HOME}/00_base/scripts/install_awscli.sh
+${SACHIN_HOME}/00_base/scripts/install_kafka.sh
 
 ${SACHIN_HOME}/00_base/scripts/setup_services.sh

@@ -31,6 +31,14 @@ createUser_Sachin() {
   echo "$(cat ${SACHIN_HOME}/00_base/id_rsa.pub)" >> ${SACHIN_HOME}/.ssh/authorized_keys
   echo '' >> ${SACHIN_HOME}/.ssh/authorized_keys
 
+  echo "
+Host *
+    StrictHostKeyChecking no
+" > $SACHIN_HOME/.ssh/config
+
+  chmod 400 $SACHIN_HOME/.ssh/id_rsa
+  chmod 400 $SACHIN_HOME/.ssh/id_rsa.pub
+
   chown -R sachin:sachin ${SACHIN_HOME}
   chmod -R 755 $SACHIN_HOME
 }
