@@ -11,3 +11,5 @@
 **/*apicurio*.zip
 
 **/*.tar.gz
+
+**/*.tfstate*
