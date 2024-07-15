@@ -37,4 +37,4 @@ terraform apply -input=false -auto-approve
 
 end=$(date +%s)
 timeTaken=$((end-start))
-echo "Time to execute script is : "$timeTaken
+echo "Time to execute script (in seconds) is : "$timeTaken
