@@ -37,6 +37,5 @@ export PATH=$HOME/softwares/bins:$HOME/softwares/maven/bin:$PATH
 ${SACHIN_HOME}/00_base/scripts/install_nginx.sh
 ${SACHIN_HOME}/00_base/scripts/install_maven.sh
 ${SACHIN_HOME}/00_base/scripts/install_awscli.sh
-${SACHIN_HOME}/00_base/scripts/install_kafka.sh
 
 ${SACHIN_HOME}/00_base/scripts/setup_services.sh

@@ -1,15 +1,15 @@
 #!/bin/bash
 
 ########################################################
-export SACHIN_HOME=/home/sachin
-export KAFKA_HOME=/home/sachin/softwares/kafka
+export KAFKA_HOME_DIR=/home/kafka
+export KAFKA_HOME=/home/kafka/softwares/kafka
 ########################################################
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo "Inside the setup_monitoring shell script.....pwd is: $(pwd), running as : [$(whoami)]"
 
-RESOURCE_SCRIPT_HOME=${SACHIN_HOME}/resources_00_tmp/scripts
+RESOURCE_SCRIPT_HOME=${KAFKA_HOME_DIR}/resources_00_tmp/scripts
 
 MASTER_IP=$1
 WORKER_ONE_IP=$2
@@ -24,14 +24,14 @@ sudo systemctl stop prometheus
 
 sudo rm -rf /var/lib/prometheus
 sudo mkdir -p /var/lib/prometheus
-sudo chown -R sachin:sachin /var/lib/prometheus
+sudo chown -R kafka:kafka /var/lib/prometheus
 
-rm -rf ${SACHIN_HOME}/softwares/prometheus
-rm -rf ${SACHIN_HOME}/softwares/dist/prometheus
-rm -rf ${SACHIN_HOME}/softwares/dist/prometheus-*.tar.gz
+rm -rf ${KAFKA_HOME_DIR}/softwares/prometheus
+rm -rf ${KAFKA_HOME_DIR}/softwares/dist/prometheus
+rm -rf ${KAFKA_HOME_DIR}/softwares/dist/prometheus-*.tar.gz
 
-tar -xvf  ${SACHIN_HOME}/resources_00_tmp/lib/prometheus-2.22.0.linux-amd64.tar.gz -C ${SACHIN_HOME}/softwares/dist
-ln -s ${SACHIN_HOME}/softwares/dist/prometheus-2.22.0.linux-amd64 ${SACHIN_HOME}/softwares/prometheus
+tar -xvf  ${KAFKA_HOME_DIR}/resources_00_tmp/lib/prometheus-2.22.0.linux-amd64.tar.gz -C ${KAFKA_HOME_DIR}/softwares/dist
+ln -s ${KAFKA_HOME_DIR}/softwares/dist/prometheus-2.22.0.linux-amd64 ${KAFKA_HOME_DIR}/softwares/prometheus
 
 echo "
 global:
@@ -42,7 +42,7 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: ['${MASTER_IP}:7071','${WORKER_ONE_IP}:7071','${WORKER_TWO_IP}:7071']
-" > ${SACHIN_HOME}/resources_00_tmp/lib/prometheus.yml
+" > ${KAFKA_HOME_DIR}/resources_00_tmp/lib/prometheus.yml
 
     echo  "
 
@@ -52,13 +52,13 @@ scrape_configs:
     After=network-online.target
 
     [Service]
-    User=sachin
+    User=kafka
     Type=simple
-    ExecStart=${SACHIN_HOME}/softwares/prometheus/prometheus \
-        --config.file ${SACHIN_HOME}/resources_00_tmp/lib/prometheus.yml \
+    ExecStart=${KAFKA_HOME_DIR}/softwares/prometheus/prometheus \
+        --config.file ${KAFKA_HOME_DIR}/resources_00_tmp/lib/prometheus.yml \
         --storage.tsdb.path /var/lib/prometheus/ \
-        --web.console.templates=${SACHIN_HOME}/softwares/prometheus/consoles \
-        --web.console.libraries=${SACHIN_HOME}/softwares/prometheus/console_libraries
+        --web.console.templates=${KAFKA_HOME_DIR}/softwares/prometheus/consoles \
+        --web.console.libraries=${KAFKA_HOME_DIR}/softwares/prometheus/console_libraries
 
     [Install]
     WantedBy=multi-user.target

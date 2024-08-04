@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ########################################################
-export SACHIN_HOME=/home/sachin
-export KAFKA_HOME=/home/sachin/softwares/kafka
+export KAFKA_HOME_DIR=/home/kafka
+export KAFKA_HOME=/home/kafka/softwares/kafka
 ########################################################
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -14,7 +14,7 @@ sudo systemctl stop grafana
 
 sudo rm -rf /var/log/grafana
 sudo mkdir -p /var/log/grafana
-sudo chown -R sachin:sachin /var/log/grafana
+sudo chown -R kafka:kafka /var/log/grafana
 
 rm -rf ${HOME}/softwares/grafana
 rm -rf ${HOME}/softwares/dist/grafana-v11.1.0
@@ -34,7 +34,7 @@ setupService_grafana() {
     After=network-online.target
 
     [Service]
-    User=sachin
+    User=kafka
     Type=simple
     ExecStart=${HOME}/softwares/grafana/bin/grafana server --homepath ${HOME}/softwares/grafana cfg:default.paths.logs=/var/log/grafana/grafana.log
 

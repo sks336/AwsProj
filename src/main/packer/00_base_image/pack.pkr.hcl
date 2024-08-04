@@ -13,12 +13,13 @@ source "amazon-ebs" "base-centos" {
   region        = "ap-southeast-1"
   source_ami_filter {
     filters = {
-      image-id            = "ami-0ae37f3c833e41701"
+      image-id            = "ami-060e277c0d4cce553"
 #      root-device-type    = "ebs"
 #      virtualization-type = "hvm"
     }
     most_recent = true
-    owners      = ["aws-marketplace"]
+#    owners      = ["aws-marketplace"]
+    owners      = ["amazon"]
   }
   ssh_username = "ubuntu"
 }
