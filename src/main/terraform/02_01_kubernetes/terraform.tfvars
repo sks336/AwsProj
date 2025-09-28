@@ -1,6 +1,6 @@
 aws_region="ap-southeast-1"
 
-pem_file = "/Users/sachin/work/keys/aws/sjlearning_2024/sachin-kp.pem"
+pem_file = "/tmp/sachin-kp.pem"
 pem_key_name = "sachin-kp"
 
 role_name_ssm = "ssm_role"
