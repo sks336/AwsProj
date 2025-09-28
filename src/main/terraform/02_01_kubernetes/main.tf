@@ -49,6 +49,7 @@ resource "aws_instance" "kube_node_control_plane" {
       type    = "ssh"
       port    = 22
       user    = "ubuntu"
+      key_name      = var.pem_key_name
       private_key = file("${var.pem_file}")
       timeout = "2m"
       agent   = false
@@ -79,6 +80,7 @@ resource "aws_instance" "kube_node_masters" {
       type    = "ssh"
       port    = 22
       user    = "ubuntu"
+      key_name      = var.pem_key_name
       private_key = file("${var.pem_file}")
       timeout = "2m"
       agent   = false
@@ -114,6 +116,7 @@ resource "aws_instance" "kube_node_workers" {
       type    = "ssh"
       port    = 22
       user    = "ubuntu"
+      key_name      = var.pem_key_name
       private_key = file("${var.pem_file}")
       timeout = "2m"
       agent   = false
