@@ -3,14 +3,14 @@ provider "aws" {
 }
 
 
-data "terraform_remote_state" "state_01_basic" {
-  backend = "s3"
-  config = {
-    bucket = var.bucket_name
-    region = var.aws_region
-    key = var.state_01_basic_key
-  }
-}
+#data "terraform_remote_state" "state_01_basic" {
+#  backend = "s3"
+#  config = {
+#    bucket = var.bucket_name
+#    region = var.aws_region
+#    key = var.state_01_basic_key
+#  }
+#}
 
 module "vpc_01" {
   source = "../modules/vpc_base"

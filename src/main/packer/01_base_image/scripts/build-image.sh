@@ -24,13 +24,19 @@ downloadLib_Locally() {
       echo 'Grafana Jar already available in source'
   fi
 
-    if [[ ! -f ${LIB_DIR}/kafka_2.12-3.7.1.tgz ]]; then
-      echo 'Kafka jar does not exists, downloading....'
-      wget https://downloads.apache.org/kafka/3.7.1/kafka_2.12-3.7.1.tgz --no-check-certificate -O ${LIB_DIR}/kafka_2.12-3.7.1.tgz
-      else
-        echo 'Kafka Jar already available in source'
-    fi
+  if [[ ! -f ${LIB_DIR}/kafka_2.12-3.7.1.tgz ]]; then
+    echo 'Kafka jar does not exists, downloading....'
+    wget https://downloads.apache.org/kafka/3.7.1/kafka_2.12-3.7.1.tgz --no-check-certificate -O ${LIB_DIR}/kafka_2.12-3.7.1.tgz
+    else
+      echo 'Kafka Jar already available in source'
+  fi
 
+  if [[ ! -f ${LIB_DIR}/jmx_prometheus_javaagent-1.0.1.jar ]]; then
+    echo 'JMX Prometheus Agent jar does not exists, downloading....'
+    wget https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/1.0.1/jmx_prometheus_javaagent-1.0.1.jar --no-check-certificate -O ${LIB_DIR}/jmx_prometheus_javaagent-1.0.1.jar
+    else
+      echo 'JMX Prometheus Agent jar already available in source'
+  fi
 
 }
 

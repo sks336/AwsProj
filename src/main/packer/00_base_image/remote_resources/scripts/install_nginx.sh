@@ -7,7 +7,7 @@ handleNginX() {
 
   echo '
   PRIVATE_IP=$(curl -sSX GET http://169.254.169.254/latest/meta-data/local-ipv4)
-  echo $PRIVATE_IP | sudo tee /var/www/html/index.nginx-debian.html
+  echo $PRIVATE_IP | sudo tee /var/www/html/index.html
   sudo nginx -s stop
   sudo nginx
   ' | sudo tee /usr/bin/nginx.sh

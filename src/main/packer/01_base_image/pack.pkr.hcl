@@ -13,7 +13,7 @@ source "amazon-ebs" "base-centos" {
   region        = "ap-southeast-1"
   source_ami_filter {
     filters = {
-      image-id            = "ami-025e1d2dc44893e0e"
+      image-id            = "ami-0c10eaebb842e7335"
 #      root-device-type    = "ebs"
 #      virtualization-type = "hvm"
     }

@@ -36,11 +36,11 @@ Host *
     StrictHostKeyChecking no
 " > $SACHIN_HOME/.ssh/config
 
-  chmod 400 $SACHIN_HOME/.ssh/id_rsa
-  chmod 400 $SACHIN_HOME/.ssh/id_rsa.pub
-
   chown -R sachin:sachin ${SACHIN_HOME}
   chmod -R 755 $SACHIN_HOME
+
+  chmod 400 $SACHIN_HOME/.ssh/id_rsa
+  chmod 400 $SACHIN_HOME/.ssh/id_rsa.pub
 }
 
 sudo bash -c "$(declare -f createUser_Sachin); createUser_Sachin"
