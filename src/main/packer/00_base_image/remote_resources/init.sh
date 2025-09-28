@@ -1,4 +1,4 @@
-#!/bin/bash
+                                                                                                                                                                                                                                                            #!/bin/bash
 
 ########################################################
 export UBUNTU_HOME=/home/ubuntu

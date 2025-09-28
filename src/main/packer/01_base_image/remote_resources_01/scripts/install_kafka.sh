@@ -11,6 +11,7 @@ echo "Inside script install_kafka.sh....running as : [$(whoami)]"
 
 mkdir -p ${KAFKA_HOME_DIR}/softwares/dist
 
+cp -rf ${SACHIN_HOME}/softwares/dist/jmx_prometheus_javaagent-1.0.1.jar ${KAFKA_HOME_DIR}/softwares/dist
 tar -xvf ${SACHIN_HOME}/softwares/dist/kafka_2.12-3.7.1.tgz -C ${KAFKA_HOME_DIR}/softwares/dist
 tar -xvf ${SACHIN_HOME}/softwares/dist/prometheus-2.22.0.linux-amd64.tar.gz -C ${KAFKA_HOME_DIR}/softwares/dist
 tar -xvf ${SACHIN_HOME}/softwares/dist/grafana-11.1.0.linux-amd64.tar.gz -C ${KAFKA_HOME_DIR}/softwares/dist

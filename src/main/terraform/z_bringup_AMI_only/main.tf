@@ -46,7 +46,7 @@ resource "aws_security_group" "allowed_ports" {
 resource "aws_instance" "instance" {
   ami           = var.ami_image
   instance_type = var.instance_type
-  key_name = "sachin-kp"
+  key_name = var.pem_key_name
   vpc_security_group_ids = [aws_security_group.allowed_ports.id]
 
   tags = {
@@ -67,7 +67,7 @@ resource "null_resource" "run_me_always" {
     type        = "ssh"
     port        = 22
     user        = "ubuntu"
-    private_key = "${file("/Users/sachin/work/keys/aws/sjlearning_2024/sachin-kp.pem")}"
+    private_key = file("${var.pem_file}")
     timeout     = "2m"
     agent       = false
   }

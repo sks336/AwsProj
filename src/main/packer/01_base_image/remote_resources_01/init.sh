@@ -18,6 +18,9 @@ echo "PasswordAuthentication yes" | sudo tee /etc/ssh/sshd_config.d/60-cloudimg-
 
 cp -rf ${SACHIN_HOME}/01_base/lib/* ${SACHIN_HOME}/softwares/dist/
 
+echo "Listing softwares dist!!!!!!!!"
+ls -asl ${SACHIN_HOME}/softwares/dist/
+
 mkdir -p ${SACHIN_HOME}/softwares/scripts_util
 cp -rf ${SACHIN_HOME}/01_base/scripts/util/*.sh ${SACHIN_HOME}/softwares/scripts_util
 chmod +x ${SACHIN_HOME}/softwares/scripts_util/*.sh
