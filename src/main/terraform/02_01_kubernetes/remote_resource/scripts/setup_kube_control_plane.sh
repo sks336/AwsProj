@@ -1,12 +1,10 @@
 #!/bin/bash
 
 SCRIPTS_DIR=/tmp/remote_resource/scripts
-KUBE_HOME_DIR=/home/kube
-
 
 echo "Setting up kube master..."
 
-sudo chmod -R 755 /home/kube #TODO Move this command to Image
+sudo chmod -R 755 /home/sachin #TODO Move this command to Image
 
 #sudo hostnamectl set-hostname master0
 
@@ -22,12 +20,12 @@ sudo kubeadm init \
   --control-plane-endpoint "$MASTER_IP:6443" \
   --upload-certs \
   --pod-network-cidr=192.168.0.0/16 \
-  > /home/kube/kube.log 2>&1
+  > /home/sachin/kube.log 2>&1
 
 sleep 5
 
-CONTROL_CMD=$(awk '/You can now join any number of the control-plane node/{flag=1; next} flag && NF {gsub(/\\/, "", $0); printf "%s ", $0} /--certificate-key/ {print ""; exit}' /home/kube/kube.log)
-WORKER_CMD=$(awk '/Then you can join any number of worker nodes/{found=1; next} found && /kubeadm join/,EOF {gsub(/\\/, "", $0); printf "%s ", $0}' /home/kube/kube.log)
+CONTROL_CMD=$(awk '/You can now join any number of the control-plane node/{flag=1; next} flag && NF {gsub(/\\/, "", $0); printf "%s ", $0} /--certificate-key/ {print ""; exit}' /home/sachin/kube.log)
+WORKER_CMD=$(awk '/Then you can join any number of worker nodes/{found=1; next} found && /kubeadm join/,EOF {gsub(/\\/, "", $0); printf "%s ", $0}' /home/sachin/kube.log)
 
 echo "CONTROL_CMD = $CONTROL_CMD"
 echo "WORKER_CMD = $WORKER_CMD"
