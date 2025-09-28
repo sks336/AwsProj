@@ -194,7 +194,7 @@ resource "null_resource" "run_me_always_control_plane" {
 
     inline = [
       "chmod +x /tmp/remote_resource/scripts/*.sh",
-      "sudo -H -u kube /tmp/remote_resource/scripts/setup_kube_control_plane.sh"
+      "sudo -H -u sachin /tmp/remote_resource/scripts/setup_kube_control_plane.sh"
     ]
   }
 
