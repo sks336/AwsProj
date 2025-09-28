@@ -199,11 +199,11 @@ resource "null_resource" "run_me_always_control_plane" {
   }
 
   provisioner "local-exec" {
-    command = "ssh -i ${var.pem_file} -o StrictHostKeyChecking=no ubuntu@${aws_instance.kube_node_control_plane.public_ip} 'cat /home/kube/join_worker.out' > ${path.module}/join_worker.out"
+    command = "ssh -i ${var.pem_file} -o StrictHostKeyChecking=no ubuntu@${aws_instance.kube_node_control_plane.public_ip} 'cat /home/sachin/join_worker.out' > ${path.module}/join_worker.out"
   }
 
   provisioner "local-exec" {
-    command = "ssh -i ${var.pem_file} -o StrictHostKeyChecking=no ubuntu@${aws_instance.kube_node_control_plane.public_ip} 'cat /home/kube/join_master.out' > ${path.module}/join_master.out"
+    command = "ssh -i ${var.pem_file} -o StrictHostKeyChecking=no ubuntu@${aws_instance.kube_node_control_plane.public_ip} 'cat /home/sachin/join_master.out' > ${path.module}/join_master.out"
   }
 }
 
