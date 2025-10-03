@@ -1,0 +1,25 @@
+image:
+  registry: docker.io
+  repository: bitnamisecure/redis
+  tag: latest
+
+sentinel:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnamisecure/redis-sentinel
+    tag: latest
+  masterSet: "mymaster"
+  replicas: 2
+  usePassword: true
+
+replica:
+  replicaCount: 2
+
+auth:
+  enabled: true
+  password: "admin123"
+
+persistence:
+  enabled: true
+  size: 1Gi
