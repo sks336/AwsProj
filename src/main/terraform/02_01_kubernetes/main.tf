@@ -25,7 +25,6 @@ resource "aws_network_interface" "worker2" {
   security_groups = [aws_security_group.k8s_nodes.id]
 }
 
-
 resource "aws_instance" "kube_node_control_plane" {
   ami           = var.ami_image
   instance_type = var.master_instance_type
@@ -227,6 +226,10 @@ output "worker_join_command" {
   value = data.local_file.worker_join_command.content
 }
 
+output "master0_public_ip" {
+  description = "Public IP of the master0 Kubernetes node"
+  value       = aws_instance.kube_node_control_plane.public_ip
+}
 
 resource "null_resource" "wait_for_master" {
   depends_on = [data.local_file.worker_join_command]
