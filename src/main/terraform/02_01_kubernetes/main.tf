@@ -195,6 +195,7 @@ resource "null_resource" "run_me_always_control_plane" {
       "chmod +x /tmp/remote_resource/scripts/*.sh",
       "sudo -H -u sachin mkdir -p /home/sachin/02_01_kube_resource",
       "sudo -H -u sachin cp -rf /tmp/remote_resource/* /home/sachin/02_01_kube_resource/",
+      "sudo -H -u sachin find /home/sachin/02_01_kube_resource/ -type f -iname '*.sh' -exec chmod +x {} \\;",
       "sudo -H -u sachin /tmp/remote_resource/scripts/setup_kube_control_plane.sh"
     ]
   }
