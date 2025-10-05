@@ -332,7 +332,7 @@ resource "aws_security_group" "k8s_nodes" {
     from_port   = 30000
     to_port     = 32767
     protocol    = "tcp"
-    cidr_blocks = ["172.31.0.0/16"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   # Optional: Allow all traffic within the security group (node-to-node)
