@@ -16,6 +16,14 @@ echo "MASTER_IP=$MASTER_IP"
 
 $SCRIPTS_DIR/clean_kube.sh
 
+
+echo "export NS=default" >> ~/.bashrc
+echo "alias c='clear'" >> ~/.bashrc
+echo "alias k='kubectl'" >> ~/.bashrc
+echo "alias kn='echo Namespace: \$NS && kubectl -n \$NS'" >> ~/.bashrc
+echo "alias h='helm'" >> ~/.bashrc
+echo "alias hn='echo Namespace: \$NS && helm -n \$NS'" >> ~/.bashrc
+
 sudo kubeadm init \
   --control-plane-endpoint "$MASTER_IP:6443" \
   --upload-certs \
