@@ -18,7 +18,7 @@ ami_image = "ami-0e7b0a8faa9ada04a"
 
 master_node_count = 0
 worker_nodes_count = 2
-master_instance_type = "t3.xlarge"
-worker_instance_type = "t3.xlarge"
+master_instance_type = "t3.large"
+worker_instance_type = "t3.medium"
 
 
