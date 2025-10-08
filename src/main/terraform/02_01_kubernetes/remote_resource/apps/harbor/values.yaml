@@ -1,0 +1,62 @@
+expose:
+  type: nodePort
+  tls:
+    enabled: false
+  nodePort:
+    name: nginx
+    ports:
+      http:
+        nodePort: 30003
+      https:
+        nodePort: 30004
+  ingress:
+    hosts:
+      core: harbor.local
+
+externalURL: http://kube.techlearning.me:30003
+
+harborAdminPassword: "admin123"
+
+database:
+  type: internal
+  internal:
+    password: "admin123"
+  external:
+    enabled: false
+
+redis:
+  type: internal
+
+core:
+  replicas: 1
+
+portal:
+  replicas: 1
+
+jobservice:
+  replicas: 1
+
+registry:
+  replicas: 1
+  persistence:
+    enabled: false   # Disable persistent volume for testing
+
+chartmuseum:
+  enabled: false     # Optional: disable if not needed
+
+clair:
+  enabled: false     # Optional: disable vulnerability scanning (faster setup)
+
+notary:
+  enabled: false
+
+trivy:
+  enabled: false     # Disable for dev speed
+
+metrics:
+  enabled: false
+
+persistence:
+  enabled: false     # Disable PVCs for local testing
+
+logLevel: debug
