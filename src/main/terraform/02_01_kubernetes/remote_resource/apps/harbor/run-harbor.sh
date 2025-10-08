@@ -22,8 +22,8 @@ helm -n $NS install $APP_NAME harbor/harbor \
 
 
 echo "Access Harbor UI at : http://kube.techlearning.me:30003"
-echo "Username=> admin"
-echo "Password=> admin123"
+echo "Username: admin"
+echo "Password: admin123"
 
 
 

@@ -13,3 +13,7 @@ kubectl get namespace $NS >/dev/null 2>&1 || kubectl create namespace $NS
 
 
 kubectl -n $NS apply -f $SCRIPTS_DIR/minio.yaml
+
+echo "Access minio at : http://kube.techlearning.me:32081/login"
+echo "Username: admin"
+echo "Password: admin123"
