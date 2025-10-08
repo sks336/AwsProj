@@ -92,7 +92,7 @@ resource "aws_instance" "kube_node_masters" {
 resource "aws_instance" "kube_node_workers" {
   count         = (var.worker_nodes_count)
   ami           = var.ami_image
-  instance_type = var.master_instance_type
+  instance_type = var.worker_instance_type
   # subnet_id = element(local.subnet_ids_prv, count.index % length(local.subnet_ids_prv))
   iam_instance_profile = aws_iam_instance_profile.ssm_role.name
   # vpc_security_group_ids = [aws_security_group.k8s_nodes.id]
