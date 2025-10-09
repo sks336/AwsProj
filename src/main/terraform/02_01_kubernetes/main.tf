@@ -315,7 +315,7 @@ resource "aws_security_group" "k8s_nodes" {
       from_port   = ingress.value
       to_port     = ingress.value
       protocol    = "tcp"
-      cidr_blocks = ["172.31.0.0/16"]
+      cidr_blocks = ["0.0.0.0/0"]
     }
   }
 
