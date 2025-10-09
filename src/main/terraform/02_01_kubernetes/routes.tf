@@ -31,8 +31,8 @@ resource "aws_security_group" "alb_sg" {
 # -------------------------------
 # ALB
 # -------------------------------
-resource "aws_lb" "keycloak_alb" {
-  name               = "keycloak-alb"
+resource "aws_lb" "kube_alb" {
+  name               = "kube-alb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
@@ -40,10 +40,10 @@ resource "aws_lb" "keycloak_alb" {
 }
 
 # -------------------------------
-# Target Group for APISIX
+# Target Group for KUBE
 # -------------------------------
-resource "aws_lb_target_group" "keycloak_tg" {
-  name        = "apisix-tg"
+resource "aws_lb_target_group" "kube_tg" {
+  name        = "kube-tg"
   port        = var.app_port_keycloak
   protocol    = "HTTP"
   target_type = "instance"
@@ -69,7 +69,7 @@ resource "aws_lb_target_group_attachment" "keycloak_tg_attach" {
     worker0       = aws_instance.kube_node_workers[0].id
   }
 
-  target_group_arn = aws_lb_target_group.keycloak_tg.arn
+  target_group_arn = aws_lb_target_group.kube_tg.arn
   target_id        = each.value
   port             = var.app_port_keycloak
 }
@@ -78,7 +78,7 @@ resource "aws_lb_target_group_attachment" "keycloak_tg_attach" {
 # ALB Listener for HTTPS
 # -------------------------------
 resource "aws_lb_listener" "https_listener" {
-  load_balancer_arn = aws_lb.keycloak_alb.arn
+  load_balancer_arn = aws_lb.kube_alb.arn
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
@@ -86,7 +86,7 @@ resource "aws_lb_listener" "https_listener" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.keycloak_tg.arn
+    target_group_arn = aws_lb_target_group.kube_tg.arn
   }
 
   # Optional host-based routing (if you want multiple host rules later)
@@ -109,8 +109,8 @@ resource "aws_route53_record" "keycloak_dns" {
   type    = "A"
 
   alias {
-    name                   = aws_lb.keycloak_alb.dns_name
-    zone_id                = aws_lb.keycloak_alb.zone_id
+    name                   = aws_lb.kube_alb.dns_name
+    zone_id                = aws_lb.kube_alb.zone_id
     evaluate_target_health = true
   }
 }
