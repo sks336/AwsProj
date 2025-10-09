@@ -51,14 +51,14 @@ resource "aws_lb_target_group" "kube_tg" {
 
   health_check {
     path                = "/"
-    protocol            = "HTTPS"
+    protocol            = "HTTP"
     interval            = 30
     timeout             = 5
     healthy_threshold   = 2
     unhealthy_threshold = 2
 
     # Accept both 200 and 302 as healthy
-    matcher = "200-308"
+    matcher = "200-404"
   }
 }
 

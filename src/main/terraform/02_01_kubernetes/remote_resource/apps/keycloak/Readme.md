@@ -34,3 +34,7 @@ curl -X POST "http://kube.techlearning.me:32100/realms/myrealm/protocol/openid-c
 -d "client_id=client1" \
 -d "client_secret=<CLIENT_SECRET>" \
 -d "redirect_uri=http://localhost/callback"
+
+
+#### Commands to Verify
+- ``curl -k -v -H "Host: keycloak.techlearning.me" https://worker1:30443/``
