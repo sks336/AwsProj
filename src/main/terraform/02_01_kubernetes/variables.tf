@@ -11,6 +11,11 @@ variable "allowed_ports" {
   default = [80, 443, 9000]
 }
 
+variable "subnet_id_a_pub" {
+  description = "ID of the existing subnet"
+  type        = string
+}
+
 variable "subnet_id_a_prv" {
   description = "ID of the existing subnet"
   type        = string
@@ -58,6 +63,23 @@ locals {
   ]
 }
 
+
+
+variable "app_port_keycloak" {
+  type = number
+}
+
+variable "acm_certificate_arn" {
+  type = string
+}
+
+variable "hosted_zone_id" {
+  type = string
+}
+
+variable "host_keycloak" {
+  type = string
+}
 
 variable "ami_image" {
   type = string
