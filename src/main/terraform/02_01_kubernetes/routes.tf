@@ -45,20 +45,20 @@ resource "aws_lb" "kube_alb" {
 resource "aws_lb_target_group" "kube_tg" {
   name        = "kube-tg"
   port        = var.app_port_keycloak
-  protocol    = "HTTP"
+  protocol    = "HTTPS"
   target_type = "instance"
   vpc_id      = var.vpc_id
 
   health_check {
     path                = "/"
-    protocol            = "HTTP"
+    protocol            = "HTTPS"
     interval            = 30
     timeout             = 5
     healthy_threshold   = 2
     unhealthy_threshold = 2
 
     # Accept both 200 and 302 as healthy
-    matcher = "200-302"
+    matcher = "200-308"
   }
 }
 
