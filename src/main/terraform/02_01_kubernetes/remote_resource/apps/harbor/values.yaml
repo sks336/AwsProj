@@ -13,7 +13,7 @@ expose:
     hosts:
       core: harbor.local
 
-externalURL: http://kube.techlearning.me:30003
+externalURL: https://harbor.techlearning.me
 
 harborAdminPassword: "admin123"
 
