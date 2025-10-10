@@ -10,6 +10,21 @@ helm -n $NS delete $APP_NAME || true;
 kubectl delete ns $NS || true;
 
 
+kubectl get namespace $NS >/dev/null 2>&1 || kubectl create namespace $NS
+
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /tmp/harbor_key.key \
+  -out /tmp/harbor_cert.crt \
+  -subj "/CN=harbor.techlearning.me/O=Harbor"
+
+
+kubectl create secret tls harbor-tls \
+  --cert=/tmp/harbor_cert.crt \
+  --key=/tmp/harbor_key.key \
+  -n $NS
+
+
 helm repo add harbor https://helm.goharbor.io
 helm repo update
 

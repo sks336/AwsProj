@@ -81,6 +81,10 @@ variable "host_keycloak" {
   type = string
 }
 
+variable "host_harbor" {
+  type = string
+}
+
 variable "ami_image" {
   type = string
 }
