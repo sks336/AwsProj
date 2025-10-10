@@ -29,12 +29,12 @@ helm repo add harbor https://helm.goharbor.io
 helm repo update
 
 
-
-
 helm -n $NS install $APP_NAME harbor/harbor \
   -f $SCRIPTS_DIR/values.yaml \
   --create-namespace
 
+
+kubectl -n $NS apply -f $SCRIPTS_DIR/ingress-$APP_NAME.yaml
 
 echo "Access Harbor UI at : http://kube.techlearning.me:30003"
 echo "Username: admin"
