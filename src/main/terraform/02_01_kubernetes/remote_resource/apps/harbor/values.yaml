@@ -29,34 +29,12 @@ redis:
 
 core:
   replicas: 1
-  extraVolumes:
-    - name: harbor-ca
-      configMap:
-        name: harbor-ca
-  extraVolumeMounts:
-    - name: harbor-ca
-      mountPath: /usr/local/share/ca-certificates/harbor
-      readOnly: true
-  extraEnv:
-    - name: HARBOR_INIT_CMD
-      value: "update-ca-certificates && /harbor/start.sh"
 
 portal:
   replicas: 1
 
 jobservice:
   replicas: 1
-  extraVolumes:
-    - name: harbor-ca
-      configMap:
-        name: harbor-ca
-  extraVolumeMounts:
-    - name: harbor-ca
-      mountPath: /usr/local/share/ca-certificates/harbor
-      readOnly: true
-  extraEnv:
-    - name: HARBOR_INIT_CMD
-      value: "update-ca-certificates && /harbor/start.sh"
 
 registry:
   replicas: 1
