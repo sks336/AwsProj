@@ -24,7 +24,7 @@ kubectl create secret tls harbor-tls \
   --key=/tmp/harbor_key.key \
   -n $NS
 
-kubectl -n $NS create configmap harbor-ca   --from-file=$SCRIPTS_DIR/../certs/root-ca.pem   --from-file=$SCRIPTS_DIR/../certs/intermediate-ca.pem
+# kubectl -n $NS create configmap harbor-ca   --from-file=$SCRIPTS_DIR/../certs/root-ca.pem   --from-file=$SCRIPTS_DIR/../certs/intermediate-ca.pem
 
 helm repo add harbor https://helm.goharbor.io
 helm repo update
