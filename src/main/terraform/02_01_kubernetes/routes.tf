@@ -115,7 +115,7 @@ resource "aws_route53_record" "keycloak_dns" {
   }
 }
 
-resource "aws_route53_record" "keycloak_dns" {
+resource "aws_route53_record" "harbor_dns" {
   zone_id = var.hosted_zone_id
   name    = var.host_harbor
   type    = "A"
