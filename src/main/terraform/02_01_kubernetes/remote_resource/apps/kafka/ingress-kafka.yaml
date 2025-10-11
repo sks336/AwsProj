@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kafka-ingress
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+spec:
+  rules:
+    - host: kafka-0.techlearning.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kafka-0-external
+                port:
+                  number: 9094
+    - host: kafka-1.techlearning.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kafka-1-external
+                port:
+                  number: 9094
+    - host: kafka-2.techlearning.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kafka-2-external
+                port:
+                  number: 9094

@@ -1,0 +1,33 @@
+replicaCount: 3
+
+image:
+  tag: 3.7.0
+
+service:
+  type: ClusterIP
+
+externalAccess:
+  enabled: true
+  service:
+    type: NodePort
+    domain: techlearning.me
+    useHostNames: true
+    annotations:
+      kubernetes.io/ingress.class: alb
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/target-type: ip
+
+  # Each broker gets a unique hostname and ingress
+  autoDiscovery:
+    enabled: false
+  broker:
+    externalPort: 9094
+
+# Disable authentication for testing (enable later)
+auth:
+  clientProtocol: plaintext
+
+# ZooKeeper settings (Bitnami chart deploys one by default)
+zookeeper:
+  enabled: true
+  replicaCount: 3
