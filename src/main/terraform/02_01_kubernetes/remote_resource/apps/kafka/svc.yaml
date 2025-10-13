@@ -12,7 +12,7 @@ spec:
   ports:
     - name: kafka
       port: 9092
-      targetPort: 9092
+      targetPort: 9094
   selector:
     statefulset.kubernetes.io/pod-name: "kafka-0"
 
@@ -32,7 +32,7 @@ spec:
   ports:
     - name: kafka
       port: 9093
-      targetPort: 9092
+      targetPort: 9094
   selector:
     statefulset.kubernetes.io/pod-name: "kafka-1"
 
@@ -52,6 +52,6 @@ spec:
   ports:
     - name: kafka
       port: 9094
-      targetPort: 9092
+      targetPort: 9094
   selector:
     statefulset.kubernetes.io/pod-name: "kafka-2"
