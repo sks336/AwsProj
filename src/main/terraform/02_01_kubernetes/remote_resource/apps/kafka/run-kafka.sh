@@ -10,10 +10,8 @@ kubectl get namespace $NS >/dev/null 2>&1 || kubectl create namespace $NS
 
 kubectl apply -f $SCRIPTS_DIR/zk.yaml
 sleep 1
-kubectl apply -f $SCRIPTS_DIR/kafka.yaml
-#sleep 1
-#kubectl -n $NS apply -f $SCRIPTS_DIR/ingress-${APP_NAME}.yaml
 
+kubectl apply -f $SCRIPTS_DIR/kafka.yaml
 sleep 3
 
 kubectl apply -f $SCRIPTS_DIR/svc.yaml

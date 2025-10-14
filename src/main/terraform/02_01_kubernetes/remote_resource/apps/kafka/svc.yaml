@@ -11,7 +11,7 @@ spec:
   type: LoadBalancer
   ports:
     - name: kafka
-      port: 9092
+      port: 9094
       targetPort: 9094
   selector:
     statefulset.kubernetes.io/pod-name: "kafka-0"
@@ -31,7 +31,7 @@ spec:
   type: LoadBalancer
   ports:
     - name: kafka
-      port: 9093
+      port: 9094
       targetPort: 9094
   selector:
     statefulset.kubernetes.io/pod-name: "kafka-1"
