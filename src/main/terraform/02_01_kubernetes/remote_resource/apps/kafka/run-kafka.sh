@@ -5,6 +5,8 @@ echo "SCRIPTS_DIR: $SCRIPTS_DIR"
 
 NS=ns-kafka
 
+kubectl -n $NS delete -f $SCRIPTS_DIR/svc.yaml || true
+
 kubectl delete ns $NS || true;
 kubectl get namespace $NS >/dev/null 2>&1 || kubectl create namespace $NS
 
