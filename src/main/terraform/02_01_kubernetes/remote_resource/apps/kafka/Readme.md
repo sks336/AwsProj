@@ -6,6 +6,8 @@
 #### Producer:
     $KAFKA_HOME/bin/kafka-console-producer.sh --broker-list $BROKERS --topic t1
 
+     $KAFKA_HOME/bin/kafka-console-producer.sh --bootstrap-server $BROKERS --topic t1
+
 #### Consumer:
     $KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server $BROKERS --topic t1 --from-beginning
 
