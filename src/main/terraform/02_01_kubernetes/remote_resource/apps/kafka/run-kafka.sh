@@ -18,6 +18,17 @@ sleep 3
 
 kubectl apply -f $SCRIPTS_DIR/svc.yaml
 
+echo "export BROKERS=kafka-0.techlearning.me:9094,kafka-1.techlearning.me:9094,kafka-2.techlearning.me:9094"
+
+echo ""
+
+echo "\$KAFKA_HOME/bin/kafka-console-producer.sh --broker-list \$BROKERS --topic t1"
+echo "\$KAFKA_HOME/bin/kafka-console-producer.sh --bootstrap-server \$BROKERS --topic t1"
+
+echo ""
+
+echo "\$KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server \$BROKERS --topic t1 --from-beginning"
+
 
 
 
