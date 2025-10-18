@@ -126,3 +126,15 @@ resource "aws_route53_record" "harbor_dns" {
     evaluate_target_health = true
   }
 }
+
+resource "aws_route53_record" "kafdrop_dns" {
+  zone_id = var.hosted_zone_id
+  name    = var.host_kafdrop
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.kube_alb.dns_name
+    zone_id                = aws_lb.kube_alb.zone_id
+    evaluate_target_health = true
+  }
+}

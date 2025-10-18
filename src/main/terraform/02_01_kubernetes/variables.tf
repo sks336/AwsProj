@@ -85,6 +85,10 @@ variable "host_harbor" {
   type = string
 }
 
+variable "host_kafdrop" {
+  type = string
+}
+
 variable "ami_image" {
   type = string
 }
