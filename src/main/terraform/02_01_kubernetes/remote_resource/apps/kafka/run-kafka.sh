@@ -30,6 +30,18 @@ echo ""
 echo "\$KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server \$BROKERS --topic t1 --from-beginning"
 
 
+echo "Deploying Kafdrop....."
+
+sleep 1
+
+kubectl apply -f $SCRIPTS_DIR/kafdrop.yaml
+
+echo "Deploying Kafdrop Ingress....."
+sleep 5
+kubectl apply -f $SCRIPTS_DIR/kafdrop-ingress.yaml
+
+echo "Access Kafdrop at: https://kafdrop.techlearning.me"
+
 
 
 
