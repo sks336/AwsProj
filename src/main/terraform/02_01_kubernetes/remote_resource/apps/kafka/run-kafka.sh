@@ -32,13 +32,13 @@ echo "\$KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server \$BROKERS --
 
 echo "Deploying Kafdrop....."
 
-sleep 1
+echo "Give time for kafka pods to come up for Kafdrop to work fine..sleep 20 seconds....." && sleep 20
 
 kubectl apply -f $SCRIPTS_DIR/kafdrop.yaml
 
 echo "Deploying Kafdrop Ingress....."
 sleep 5
-kubectl apply -f $SCRIPTS_DIR/kafdrop-ingress.yaml
+kubectl apply -f $SCRIPTS_DIR/ingress-kafdrop.yaml
 
 echo "Access Kafdrop at: https://kafdrop.techlearning.me"
 
