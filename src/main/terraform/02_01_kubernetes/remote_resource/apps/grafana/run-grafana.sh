@@ -29,7 +29,7 @@ helm repo update
 
 helm -n $NS install grafana grafana/grafana
 
-PASSWD=$(kubectl get secret grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode ; echo)
+PASSWD=$(kubectl get secret grafana -n ns-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo)
 echo "Access grafana at : https://grafana.techlearning.me"
 echo "Credentials: admin/$PASSWD"
 
