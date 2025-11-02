@@ -33,6 +33,6 @@ PASSWD=$(kubectl get secret grafana -n ns-grafana -o jsonpath="{.data.admin-pass
 echo "Access grafana at : https://grafana.techlearning.me"
 echo "Credentials: admin/$PASSWD"
 
-#sleep 3
-#
-#kubectl -n $NS apply -f $SCRIPTS_DIR/ingress-prometheus.yaml
+sleep 3
+
+kubectl -n $NS apply -f $SCRIPTS_DIR/ingress-grafana.yaml
