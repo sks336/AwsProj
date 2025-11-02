@@ -22,4 +22,4 @@ spec:
               service:
                 name: granana
                 port:
-                  number: 8080
+                  number: 80

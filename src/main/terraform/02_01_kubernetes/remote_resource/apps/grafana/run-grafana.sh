@@ -24,13 +24,15 @@ kubectl create secret tls granana-tls \
   -n $NS
 
 
-#helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-#helm repo update
-#
-#
-#helm -n $NS install prometheus prometheus-community/prometheus
-#
-#
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+
+helm -n $NS install grafana grafana/grafana
+
+PASSWD=$(kubectl get secret grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode ; echo)
+echo "Access grafana at : https://grafana.techlearning.me"
+echo "Credentials: admin/$PASSWD"
+
 #sleep 3
 #
 #kubectl -n $NS apply -f $SCRIPTS_DIR/ingress-prometheus.yaml
