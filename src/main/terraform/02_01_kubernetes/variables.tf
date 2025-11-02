@@ -89,6 +89,14 @@ variable "host_kafdrop" {
   type = string
 }
 
+variable "host_prometheus" {
+  type = string
+}
+
+variable "host_grafana" {
+  type = string
+}
+
 variable "ami_image" {
   type = string
 }

@@ -26,6 +26,8 @@ worker_instance_type = "t3.medium"
 host_keycloak = "keycloak.techlearning.me"
 host_harbor = "harbor.techlearning.me"
 host_kafdrop = "kafdrop.techlearning.me"
+host_prometheus = "prometheus.techlearning.me"
+host_grafana = "grafana.techlearning.me"
 
 hosted_zone_id = "Z0220809O47PS7K1065N"
 acm_certificate_arn = "arn:aws:acm:ap-southeast-1:339713188524:certificate/9f7cd8ba-3176-46da-b79e-6fa7df096a5d"
