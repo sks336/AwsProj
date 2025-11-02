@@ -3,7 +3,7 @@
 SCRIPTS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "SCRIPTS_DIR: $SCRIPTS_DIR"
 
-NS=ns-granana
+NS=ns-grafana
 
 kubectl delete ns $NS
 
@@ -13,14 +13,14 @@ kubectl get namespace $NS >/dev/null 2>&1 || kubectl create namespace $NS
 
 
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-  -keyout /tmp/granana_key.key \
-  -out /tmp/granana_cert.crt \
-  -subj "/CN=granana.techlearning.me/O=Granana"
+  -keyout /tmp/grafana_key.key \
+  -out /tmp/grafana_cert.crt \
+  -subj "/CN=grafanatechlearning.me/O=Grafana"
 
 
-kubectl create secret tls granana-tls \
-  --cert=/tmp/granana_cert.crt \
-  --key=/tmp/granana_key.key \
+kubectl create secret tls grafana-tls \
+  --cert=/tmp/grafana_cert.crt \
+  --key=/tmp/grafana_key.key \
   -n $NS
 
 
