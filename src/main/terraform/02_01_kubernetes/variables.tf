@@ -8,7 +8,17 @@ variable "vpc_id" {
 }
 
 variable "allowed_ports" {
-  default = [80, 443, 9000]
+  default = [22, 80, 443, 3000, 5432]
+}
+
+
+variable "allowed_ports_from" {
+  default = 8000
+}
+
+
+variable "allowed_ports_to" {
+  default = 10000
 }
 
 variable "subnet_id_a_pub" {

@@ -320,9 +320,9 @@ resource "aws_security_group" "k8s_nodes" {
   }
 
   ingress {
-    description = "Allow ssh  from anywhere"
-    from_port   = 22
-    to_port     = 22
+    description = "Allow ports from/to"
+    from_port   = var.allowed_ports_from
+    to_port     = var.allowed_ports_to
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
