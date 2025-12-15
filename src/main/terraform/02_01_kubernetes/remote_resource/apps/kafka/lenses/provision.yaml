@@ -1,0 +1,15 @@
+apiVersion: lenses.io/v1
+kind: Provision
+metadata:
+  name: lenses-provision
+spec:
+  license:
+    secretRef:
+      name: lenses-license
+      key: license.json
+
+  kafka:
+    clusters:
+      - name: kafka-cluster
+        bootstrapServers:
+          - kafka-0.techlearning.me:30094

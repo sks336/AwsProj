@@ -1,0 +1,35 @@
+lenses:
+
+  security:
+    enabled: false   # enable later for prod
+
+  provisioning:
+    enabled: true
+    path: /mnt/provisioning
+
+service:
+  type: NodePort
+  nodePort: 30090
+
+extraVolumes:
+  - name: lenses-provision
+    configMap:
+      name: lenses-provision
+
+extraVolumeMounts:
+  - name: lenses-provision
+    mountPath: /mnt/provisioning
+
+
+
+resources:
+  requests:
+    memory: 2Gi
+    cpu: 0.5
+  limits:
+    memory: 3Gi
+    cpu: 1
+tolerations:
+  - key: "node-role.kubernetes.io/control-plane"
+    operator: "Exists"
+    effect: "NoSchedule"
