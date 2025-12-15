@@ -42,7 +42,7 @@ spec:
 
               # Define both internal and external listeners
               export KAFKA_LISTENERS=INTERNAL://0.0.0.0:9092,EXTERNAL://0.0.0.0:9094
-              export KAFKA_ADVERTISED_LISTENERS=INTERNAL://${HOSTNAME}.kafka-headless.ns-kafka.svc.cluster.local:9092,EXTERNAL://${HOSTNAME}.techlearning.me:9094
+              export KAFKA_ADVERTISED_LISTENERS=INTERNAL://${HOSTNAME}.kafka-headless.ns-kafka.svc.cluster.local:9092,EXTERNAL://${HOSTNAME}.techlearning.me:30094
               export KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
               export KAFKA_INTER_BROKER_LISTENER_NAME=INTERNAL
 
@@ -67,7 +67,7 @@ spec:
             - name: KAFKA_LISTENERS
               value: "INTERNAL://0.0.0.0:9092,EXTERNAL://0.0.0.0:9094"
             - name: KAFKA_ADVERTISED_LISTENERS
-              value: "INTERNAL://$(HOSTNAME).kafka-headless.ns-kafka.svc.cluster.local:9092,EXTERNAL://$(HOSTNAME).techlearning.me:9094"
+              value: "INTERNAL://$(HOSTNAME).kafka-headless.ns-kafka.svc.cluster.local:9092,EXTERNAL://$(HOSTNAME).techlearning.me:30094"
             - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
               value: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
             - name: KAFKA_INTER_BROKER_LISTENER_NAME

@@ -18,29 +18,18 @@ sleep 3
 
 kubectl apply -f $SCRIPTS_DIR/svc-sn.yaml
 
-#echo "export BROKERS=kafka-0.techlearning.me:9094,kafka-1.techlearning.me:9094,kafka-2.techlearning.me:9094"
-#
-#echo ""
-#
-#echo "\$KAFKA_HOME/bin/kafka-console-producer.sh --broker-list \$BROKERS --topic t1"
-#echo "\$KAFKA_HOME/bin/kafka-console-producer.sh --bootstrap-server \$BROKERS --topic t1"
-#
-#echo ""
-#
-#echo "\$KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server \$BROKERS --topic t1 --from-beginning"
-#
-#
-#echo "Deploying Kafdrop....."
-#
-#echo "Give time for kafka pods to come up for Kafdrop to work fine..sleep 20 seconds....." && sleep 20
-#
-#kubectl apply -f $SCRIPTS_DIR/kafdrop.yaml
-#
-#echo "Deploying Kafdrop Ingress....."
-#sleep 5
-#kubectl apply -f $SCRIPTS_DIR/ingress-kafdrop.yaml
-#
-#echo "Access Kafdrop at: https://kafdrop.techlearning.me"
+
+echo "Deploying Kafdrop....."
+
+echo "Give time for kafka pods to come up for Kafdrop to work fine..sleep 20 seconds....." && sleep 20
+
+kubectl apply -f $SCRIPTS_DIR/kafdrop.yaml
+
+echo "Deploying Kafdrop Ingress....."
+sleep 5
+kubectl apply -f $SCRIPTS_DIR/ingress-kafdrop.yaml
+
+echo "Access Kafdrop at: https://kafdrop.techlearning.me"
 
 
 
