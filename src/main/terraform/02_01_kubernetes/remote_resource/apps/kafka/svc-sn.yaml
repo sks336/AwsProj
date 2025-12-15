@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-0-external
+  namespace: ns-kafka
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-target-type: "instance"
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+spec:
+  type: NodePort
+  ports:
+    - name: kafka
+      port: 9094
+      targetPort: 9094
+      nodePort: 30094
+  selector:
+    statefulset.kubernetes.io/pod-name: "kafka-0"
+
+---
+
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: kafka-1-external
+#  namespace: ns-kafka
+#  annotations:
+#    service.beta.kubernetes.io/aws-load-balancer-target-type: "instance"
+#    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+#    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+#spec:
+#  type: LoadBalancer
+#  ports:
+#    - name: kafka
+#      port: 9094
+#      targetPort: 9094
+#  selector:
+#    statefulset.kubernetes.io/pod-name: "kafka-1"
+#
+#---
+#
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: kafka-2-external
+#  namespace: ns-kafka
+#  annotations:
+#    service.beta.kubernetes.io/aws-load-balancer-target-type: "instance"
+#    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+#    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+#spec:
+#  type: LoadBalancer
+#  ports:
+#    - name: kafka
+#      port: 9094
+#      targetPort: 9094
+#  selector:
+#    statefulset.kubernetes.io/pod-name: "kafka-2"
